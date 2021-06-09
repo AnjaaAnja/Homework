@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+    <title>Draw</title>
+    <meta charset="UTF-8">
+
+<style>
+
+    body{
+        background-image: url('background.jpg');
+        background-position:center;
+        background-size:100%;
+    }
+    #canvas {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 800px;
+        height: 600px;
+        border: 1px solid black;
+    }
+    #stickers {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+    }
+    .sticker {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 50px;
+        margin: 2px;
+    }
+    .color {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 48px;
+        height: 30px;
+        border: 1px solid black;
+        margin: 2px 1px 0px 1px;
+    }
+    .active{
+        border-radius: 20px;
+    }
+    #eraser{
+        width: 70px;
+        height: 25px;
+        margin: 10px;
+        padding: 3px;
+        background-color: indianred;
+        color:white;
+        cursor: crosshair;
+    }
+    #clear{
+        width: 70px;
+        height: 25px;
+        margin: 10px;
+        padding: 3px;
+        background-color: indianred;
+        color:white;
+    }
+    #tools{
+        display: block;
+        
+    }
+    #clr{
+        align-self: center;
+        margin: 0 10px;
+        height:30px;
+        width: 100px;
+        margin:0 20px 0 100px;
+    }
+
+</style>
+
+
+</head>
+<body>
+    <div id="tools">
+        <button id="eraser">ERASER</button>
+        <button id="clear" >CLEAR</button>
+        <input onInput="draw_color=this.value" type="color" id="clr">
+        <input onInput="draw_width=this.value" type="range" min="1" max="70">
+    </div>
+
+    <canvas id="canvas" ondragover="DragOver(event)" ondrop="Drop(event)"></canvas>
+
+    <div id="stickers">
+        <img id="i1" class="sticker"  src="http://clipart-library.com/data_images/487831.png" draggable="true" ondragstart="DragStart(event)">
+        <img id="i2" class="sticker"  src="http://clipart-library.com/data_images/487787.png" draggable="true" ondragstart="DragStart(event)">
+        <img id="i3" class="sticker"  src="http://clipart-library.com/data_images/487743.png" draggable="true" ondragstart="DragStart(event)">
+        <img id="i4" class="sticker"  src="http://clipart-library.com/data_images/487741.png" draggable="true" ondragstart="DragStart(event)">
+        <img id="i5" class="sticker"  src="http://clipart-library.com/data_images/487815.png" draggable="true" ondragstart="DragStart(event)">
+        <img id="i6" class="sticker"  src="http://clipart-library.com/data_images/402767.png" draggable="true" ondragstart="DragStart(event)">
+        <img id="i7" class="sticker"  src="http://clipart-library.com/data_images/363964.gif" draggable="true" ondragstart="DragStart(event)">
+        <img id="i8" class="sticker"  src="http://clipart-library.com/data_images/487785.png" draggable="true" ondragstart="DragStart(event)">
+        <img id="i9" class="sticker"  src="http://clipart-library.com/data_images/487810.jpg" draggable="true" ondragstart="DragStart(event)"> 
+        <img id="i10"class="sticker"  src="http://clipart-library.com/image_gallery/464509.png" draggable="true" ondragstart="DragStart(event)">
+        <img id="i11" class="sticker"  src="http://clipart-library.com/image_gallery/464541.jpg" draggable="true" ondragstart="DragStart(event)">
+    </div>
+
+    <div>
+        <script>
+
+            var colorNames = ["black", "gray", "silver", "white", "maroon", "red", "olive", "yellow", "green",
+            "lime", "teal", "aqua", "navy", "blue", "purple", "fuchsia"];
+
+            for (var i = 0; i < 16; i++) {
+                document.write(`<div  id="color${i}" class="color" style="background-color:${colorNames[i]}" onmousedown="change_color(this)"></div>`);
+            }
+
+        </script>
+    </div>
+
+    <script src="./code.js"></script>
+
+</body>
+</html>
