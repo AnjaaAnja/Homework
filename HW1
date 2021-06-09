@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Mines</title>
+                <link href='https://fonts.googleapis.com/css?family=Almendra SC' rel='stylesheet'>
+                <style>
+                    h1 {
+                        color: rgba(99, 8, 8, 0.877);
+                        text-align: center;
+                        text-shadow: 2px 2px rgb(0, 0, 0);
+                        font-size: 60px;
+                    }
+
+                    .backg {
+                        background-image: url("snake.jpg");
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: 100%;
+                        height: 810px;
+                        font-family: 'Almendra SC';
+                    }
+
+                    #text {
+                        color: rgb(187, 67, 67);
+                        float: left;
+                        clear: left;
+                        height: 300px;
+                        width: 30%;
+                        padding: 10px;
+                        margin: 25px;
+                        display: inline;
+                        text-align: justify;
+
+                    }
+
+                    #dif {
+                        color: rgb(187, 67, 67);
+                        display: inline;
+                        border-style: groove;
+                        border-color: rgb(180, 57, 57);
+                        margin: 25px 50px 75px 100px;
+                        width: 17%;
+                        float: left;
+                        clear: left;
+                        padding: 10px;
+                    }
+
+                    select {
+                        border: none;
+                        font-family: 'Almendra SC';
+                        background-color: firebrick;
+                        color: rgb(235, 178, 178);
+                    }
+
+                    #game {
+                        float: right;
+                        clear: right;
+                        background: rgb(160, 50, 50);
+                        opacity: 0.2;
+                        display: inline;
+                        margin: 10px 100px 100px 100px;
+                        width: 40%;
+                        height: 40%;
+                        border-style: groove;
+                        border-color: rgb(0, 0, 0);
+                        border-width: 2px;
+                        padding: 15px;
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    #game:hover {
+                        opacity: 1.0;
+                    }
+
+                    td {
+                        background-color: gray;
+                        width: 14px;
+                        height: 14px;
+                        font-size: 14px;
+                    }
+
+                    body {
+                        width: 100%;
+
+                    }
+
+                    table {
+                        margin: auto;
+                        align-self: center;
+                        width: 100%;
+                        height: 100%;
+
+                    
+
+                    }
+                    #ngb{
+                        float:right;
+                        clear:right;
+                        background-color:rgb(180, 57, 57) ;
+                        color:seashell;
+                        margin: 0px 100px;
+                        border-radius: 7px;
+                        display: inline;
+                    }
+                </style>
+                <script src="minefield.js"></script>
+                <script>
+                    var minefield = null;
+                    function newGame() {
+
+                        var level = document.getElementById("sel_lev");
+                        if (level.value == "Easy") {
+
+                            var tbl = document.getElementById("board");
+                            //tbl = document.createElement('table');
+                            var tbl2 = document.createElement('table');
+                            for (var s = 0; s < 10; s++) {
+                                var tr = document.createElement('tr');
+                                for (var t = 0; t < 10; t++) {
+                                    var td = document.createElement('td');
+                                    var text = document.createTextNode('');
+                                    td.appendChild(text);
+                                    tr.appendChild(td);
+                                }
+                                tbl2.appendChild(tr);
+
+                            }
+                            tbl.innerHTML = tbl2.innerHTML;
+                            minefield = new Minefield(10, 10, 5);
+                            // console.log(tbl.rows.length);
+                            for (var i = 0; i < tbl.rows.length; i++) {
+                                for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+                                    tbl.rows[i].cells[j].onclick = function () { console.log(getval(this)); };
+
+                                }
+
+                            }
+                        }
+                        if (level.value == "Medium") {
+
+
+                            var tbl = document.getElementById("board");
+                            //tbl = document.createElement('table');
+                            var tbl2 = document.createElement('table');
+                            for (var s = 1; s <= 13; s++) {
+                                var tr = document.createElement('tr');
+                                for (var t = 1; t <= 13; t++) {
+                                    var td = document.createElement('td');
+                                    var text = document.createTextNode('');
+                                    td.appendChild(text);
+                                    tr.appendChild(td);
+                                }
+                                tbl2.appendChild(tr);
+                            }
+                            tbl.innerHTML = tbl2.innerHTML;
+                            minefield = new Minefield(13, 13, 8);
+                            for (var i = 0; i < tbl.rows.length; i++) {
+                                for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+                                    tbl.rows[i].cells[j].onclick = function () { getval(this); };
+
+                                }
+
+                            }
+
+                        }
+                        if (level.value == "Hard") {
+
+                            var tbl = document.getElementById("board");
+                            //tbl = document.createElement('table');
+                            var tbl2 = document.createElement('table');
+                            for (var s = 1; s <= 15; s++) {
+                                var tr = document.createElement('tr');
+                                for (var t = 1; t <= 15; t++) {
+                                    var td = document.createElement('td');
+                                    var text = document.createTextNode('');
+                                    td.appendChild(text);
+                                    tr.appendChild(td);
+                                }
+                                tbl2.appendChild(tr);
+                            }
+                            tbl.innerHTML = tbl2.innerHTML;
+                            minefield = new Minefield(15, 15, 10);
+                            for (var i = 0; i < tbl.rows.length; i++) {
+                                for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+                                    tbl.rows[i].cells[j].onclick = function () { getval(this); };
+
+                                }
+
+                            }
+                        }
+                    
+                    }
+                
+
+                </script>
+        </head>
+
+        <body class="backg">
+
+            <h1>Serpent Master</h1>
+            
+
+                <button type="button" id="ngb" onclick="newGame()">NEW GAME</button>
+            
+
+            <div id="game">
+
+            
+                    <!--pre id="output"></pre>-->
+                    <table id="board" >
+
+                    </table>
+                
+            </div>
+        
+            <div id="text">
+                <h3>Instructions:</h3>
+                <p>You have stolen something extremely valuable from <b>The Serpent Master</b>. What has been known as the long
+                    lost <b>Key Of Fortune</b>.
+                    By a mere miracle you have gotten to <b>The Bridge Of The Salvation</b>,now you have to play a game.
+                    Your task is to choose among the boxes, behind which you do not know what lies. All you have to do is to
+                    flip them all over,
+                    without getting <b>The Kiss For The Doomed</b>, the potion that turns you into the serpent and curses you to
+                    spend internity as a servent to
+                    The Serpent Master on The Mountain of The Lost Soles.
+                    The game does not require bravery,strength or wisdom.
+                    Just luck and nothing but luck. <br> <b>So tell me, how lucky do you feel today?</b>
+                </p>
+            </div>
+
+            <div id="dif">
+                <label>Choose The Difficulty:</label>
+                <select onchange="newGame()" id="sel_lev">
+                    <option>Easy</option>
+                    <option>Medium</option>
+                    <option>Hard</option>
+                </select>
+
+            </div>
+
+            <script>
+                newGame();
+
+                var tbl = document.getElementById("board");
+                if (tbl != null) {
+                    for (var i = 0; i < tbl.rows.length; i++) {
+                        for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+                            tbl.rows[i].cells[j].onclick = function () { getval(this); };
+
+                        }
+
+                    }
+                }
+                function getval(cel) {
+                    //  alert(cel.parentNode.rowIndex);
+                    minefield.unveil(cel.parentNode.rowIndex, cel.cellIndex);
+                    for (var p = 0; p < tbl.rows.length; p++) {
+                        for (var q = 0; q < tbl.rows[p].cells.length; q++) {
+                            if (minefield.symbol(p, q) === "0") {
+                                tbl.rows[p].cells[q].innerHTML = " ";
+                                tbl.rows[p].cells[q].style.width = "14px";
+                                tbl.rows[p].cells[q].style.height = "14px";
+                                tbl.rows[p].cells[q].style.backgroundColor = "black";
+                            }
+                            else if (minefield.symbol(p, q) === ".") {
+                                tbl.rows[p].cells[q].innerHTML = " ";
+                                tbl.rows[p].cells[q].style.width = "14px";
+                                tbl.rows[p].cells[q].style.height = "14px";
+                                tbl.rows[p].cells[q].style.backgroundColor = "gray";
+                            }
+                            else {
+                                tbl.rows[p].cells[q].style.width = "14px";
+                                tbl.rows[p].cells[q].style.height = "14px";
+                                tbl.rows[p].cells[q].style.backgroundColor = "none";
+                                tbl.rows[p].cells[q].innerHTML = minefield.symbol(p, q);
+
+                            }
+                        }
+                    }
+                    if(minefield.explosions==1){
+                    alert("GAME OVER :(");
+                    }
+                
+            
+                }
+            
+
+            </script>
+        </body>
+
+        </html>
